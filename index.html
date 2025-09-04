@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Master - Interactive Trivia Challenge</title>
@@ -19,8 +19,8 @@
             min-height: 100vh;
         }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="root">
         <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center;">
             <div>
@@ -76,6 +76,46 @@
                     question: 'What is the value of π (pi) rounded to two decimal places?',
                     options: ['3.13', '3.14', '3.15', '3.16'],
                     correctAnswer: '3.14'
+                },
+                {
+                    id: 'q_5',
+                    category: 'General Knowledge',
+                    difficulty: 'easy',
+                    question: 'What is the largest mammal in the world?',
+                    options: ['African Elephant', 'Blue Whale', 'Giraffe', 'Hippopotamus'],
+                    correctAnswer: 'Blue Whale'
+                },
+                {
+                    id: 'q_6',
+                    category: 'Science',
+                    difficulty: 'easy',
+                    question: 'What gas do plants absorb from the atmosphere?',
+                    options: ['Oxygen', 'Carbon Dioxide', 'Nitrogen', 'Hydrogen'],
+                    correctAnswer: 'Carbon Dioxide'
+                },
+                {
+                    id: 'q_7',
+                    category: 'Geography',
+                    difficulty: 'easy',
+                    question: 'Which ocean is the largest?',
+                    options: ['Atlantic', 'Pacific', 'Indian', 'Arctic'],
+                    correctAnswer: 'Pacific'
+                },
+                {
+                    id: 'q_8',
+                    category: 'History',
+                    difficulty: 'easy',
+                    question: 'In which year did World War II end?',
+                    options: ['1944', '1945', '1946', '1947'],
+                    correctAnswer: '1945'
+                },
+                {
+                    id: 'q_9',
+                    category: 'Sports',
+                    difficulty: 'easy',
+                    question: 'How many players are on a basketball team on the court?',
+                    options: ['4', '5', '6', '7'],
+                    correctAnswer: '5'
                 }
             ],
             medium: [
@@ -118,6 +158,46 @@
                     question: 'What is the chemical symbol for Gold?',
                     options: ['Ag', 'Au', 'Gd', 'Go'],
                     correctAnswer: 'Au'
+                },
+                {
+                    id: 'q_5',
+                    category: 'Literature',
+                    difficulty: 'medium',
+                    question: 'Who wrote "1984"?',
+                    options: ['George Orwell', 'Aldous Huxley', 'Ray Bradbury', 'H.G. Wells'],
+                    correctAnswer: 'George Orwell'
+                },
+                {
+                    id: 'q_6',
+                    category: 'Geography',
+                    difficulty: 'medium',
+                    question: 'What is the smallest country in the world?',
+                    options: ['Monaco', 'Vatican City', 'San Marino', 'Liechtenstein'],
+                    correctAnswer: 'Vatican City'
+                },
+                {
+                    id: 'q_7',
+                    category: 'Science',
+                    difficulty: 'medium',
+                    question: 'What is the speed of light in vacuum?',
+                    options: ['299,792,458 m/s', '300,000,000 m/s', '299,000,000 m/s', '301,000,000 m/s'],
+                    correctAnswer: '299,792,458 m/s'
+                },
+                {
+                    id: 'q_8',
+                    category: 'Sports',
+                    difficulty: 'medium',
+                    question: 'In which sport would you perform a slam dunk?',
+                    options: ['Volleyball', 'Basketball', 'Tennis', 'Badminton'],
+                    correctAnswer: 'Basketball'
+                },
+                {
+                    id: 'q_9',
+                    category: 'Technology',
+                    difficulty: 'medium',
+                    question: 'What does "HTML" stand for?',
+                    options: ['HyperText Markup Language', 'High Tech Modern Language', 'Home Tool Markup Language', 'Hyperlink and Text Markup Language'],
+                    correctAnswer: 'HyperText Markup Language'
                 }
             ],
             hard: [
@@ -160,6 +240,46 @@
                     question: 'Before the American colonies switched to the Gregorian calendar in 1752, on what date did their new year start?',
                     options: ['June 1st', 'March 25th', 'September 25th', 'December 1st'],
                     correctAnswer: 'March 25th'
+                },
+                {
+                    id: 'q_5',
+                    category: 'Science',
+                    difficulty: 'hard',
+                    question: 'What is the Heisenberg Uncertainty Principle?',
+                    options: ['Energy cannot be created or destroyed', 'You cannot simultaneously know position and momentum', 'Light behaves as both wave and particle', 'Time dilates at high speeds'],
+                    correctAnswer: 'You cannot simultaneously know position and momentum'
+                },
+                {
+                    id: 'q_6',
+                    category: 'Literature',
+                    difficulty: 'hard',
+                    question: 'Who wrote "The Canterbury Tales"?',
+                    options: ['Geoffrey Chaucer', 'William Shakespeare', 'John Milton', 'Edmund Spenser'],
+                    correctAnswer: 'Geoffrey Chaucer'
+                },
+                {
+                    id: 'q_7',
+                    category: 'Geography',
+                    difficulty: 'hard',
+                    question: 'What is the deepest point in the ocean?',
+                    options: ['Mariana Trench', 'Puerto Rico Trench', 'Java Trench', 'Tonga Trench'],
+                    correctAnswer: 'Mariana Trench'
+                },
+                {
+                    id: 'q_8',
+                    category: 'Science',
+                    difficulty: 'hard',
+                    question: 'What is the smallest unit of matter that retains the properties of an element?',
+                    options: ['Molecule', 'Atom', 'Proton', 'Electron'],
+                    correctAnswer: 'Atom'
+                },
+                {
+                    id: 'q_9',
+                    category: 'History',
+                    difficulty: 'hard',
+                    question: 'Which ancient wonder was located in Alexandria?',
+                    options: ['Hanging Gardens', 'Lighthouse of Alexandria', 'Colossus of Rhodes', 'Temple of Artemis'],
+                    correctAnswer: 'Lighthouse of Alexandria'
                 }
             ]
         };
@@ -477,9 +597,15 @@
                 return 'text-red-600';
             };
 
+            const getAnswerStatus = (question, answer) => {
+                if (!answer) return { status: 'unanswered', icon: '⏰', color: 'text-gray-500' };
+                if (answer.isCorrect) return { status: 'correct', icon: '✅', color: 'text-green-600' };
+                return { status: 'incorrect', icon: '❌', color: 'text-red-600' };
+            };
+
             return (
                 <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-8 px-4">
-                    <div className="max-w-4xl mx-auto">
+                    <div className="max-w-6xl mx-auto">
                         <div className="text-center mb-8">
                             <div className="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
                                 <div className="text-4xl">🏆</div>
@@ -512,6 +638,89 @@
                                         <div className="text-sm text-gray-600">Avg. Time</div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        {/* Question Review Section */}
+                        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                            <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Question Review</h2>
+                            <div className="space-y-6">
+                                {questions.map((question, index) => {
+                                    const answer = answers.find(a => a.questionId === question.id);
+                                    const answerStatus = getAnswerStatus(question, answer);
+                                    
+                                    return (
+                                        <div key={question.id} className="border border-gray-200 rounded-lg p-6">
+                                            <div className="flex items-start justify-between mb-4">
+                                                <div className="flex items-center space-x-3">
+                                                    <span className="text-sm font-medium text-gray-500">Q{index + 1}</span>
+                                                    <span className={`text-lg ${answerStatus.color}`}>
+                                                        {answerStatus.icon}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center space-x-2">
+                                                    <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">
+                                                        {question.category}
+                                                    </span>
+                                                    <span className="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">
+                                                        {question.difficulty}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            
+                                            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                                                {question.question}
+                                            </h3>
+                                            
+                                            <div className="space-y-2 mb-4">
+                                                {question.options.map((option, optIndex) => {
+                                                    let optionClass = "p-3 rounded-lg border-2 text-sm";
+                                                    
+                                                    if (option === question.correctAnswer) {
+                                                        optionClass += " bg-green-50 border-green-300 text-green-800";
+                                                    } else if (answer && option === answer.selectedOption && !answer.isCorrect) {
+                                                        optionClass += " bg-red-50 border-red-300 text-red-800";
+                                                    } else {
+                                                        optionClass += " bg-gray-50 border-gray-200 text-gray-600";
+                                                    }
+                                                    
+                                                    return (
+                                                        <div key={optIndex} className={optionClass}>
+                                                            <div className="flex items-center justify-between">
+                                                                <span>{option}</span>
+                                                                {option === question.correctAnswer && (
+                                                                    <span className="text-green-600 font-bold">✓ Correct</span>
+                                                                )}
+                                                                {answer && option === answer.selectedOption && !answer.isCorrect && (
+                                                                    <span className="text-red-600 font-bold">✗ Your Answer</span>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                            
+                                            <div className="flex items-center justify-between text-sm text-gray-600">
+                                                <div>
+                                                    <strong>Correct Answer:</strong> {question.correctAnswer}
+                                                </div>
+                                                {answer && (
+                                                    <div>
+                                                        <strong>Your Answer:</strong> {answer.selectedOption || 'No answer'}
+                                                        <span className="ml-2">
+                                                            <strong>Time:</strong> {answer.timeSpent}s
+                                                        </span>
+                                                    </div>
+                                                )}
+                                                {!answer && (
+                                                    <div className="text-red-600">
+                                                        <strong>No answer provided</strong>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
 
@@ -582,5 +791,5 @@
             100% { transform: rotate(360deg); }
         }
     </style>
-</body>
+  </body>
 </html>
