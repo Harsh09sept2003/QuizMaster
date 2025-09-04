@@ -53,19 +53,8 @@ const mapQuestions = (results: ApiQuestion[]): Question[] =>
     };
   });
 
-// Built-in fallback to handle rate limits or API errors
-const defaultFallback: ApiQuestion[] = [
-  { category: 'General Knowledge', type: 'multiple', difficulty: 'easy', question: 'What is the capital city of France?', correct_answer: 'Paris', incorrect_answers: ['Lyon', 'Marseille', 'Nice'] },
-  { category: 'Science', type: 'multiple', difficulty: 'easy', question: 'What planet is known as the Red Planet?', correct_answer: 'Mars', incorrect_answers: ['Venus', 'Jupiter', 'Saturn'] },
-  { category: 'Entertainment', type: 'multiple', difficulty: 'medium', question: "Who directed the movie 'Inception'?", correct_answer: 'Christopher Nolan', incorrect_answers: ['James Cameron', 'Steven Spielberg', 'Quentin Tarantino'] },
-  { category: 'History', type: 'multiple', difficulty: 'medium', question: 'In what year did World War II end?', correct_answer: '1945', incorrect_answers: ['1944', '1939', '1950'] },
-  { category: 'Geography', type: 'multiple', difficulty: 'easy', question: 'Which continent is the Sahara Desert located on?', correct_answer: 'Africa', incorrect_answers: ['Asia', 'Australia', 'South America'] },
-  { category: 'Sports', type: 'multiple', difficulty: 'easy', question: 'How many players are on the field for one soccer team?', correct_answer: '11', incorrect_answers: ['10', '9', '12'] },
-  { category: 'Science', type: 'multiple', difficulty: 'hard', question: 'What is the chemical symbol for Gold?', correct_answer: 'Au', incorrect_answers: ['Ag', 'Gd', 'Go'] },
-  { category: 'General Knowledge', type: 'multiple', difficulty: 'medium', question: 'Which language has the most native speakers?', correct_answer: 'Mandarin Chinese', incorrect_answers: ['English', 'Spanish', 'Hindi'] },
-  { category: 'Technology', type: 'multiple', difficulty: 'medium', question: "What does 'CPU' stand for?", correct_answer: 'Central Processing Unit', incorrect_answers: ['Central Power Unit', 'Computer Processing Unit', 'Central Program Unit'] },
-  { category: 'Mathematics', type: 'multiple', difficulty: 'easy', question: 'What is the value of π (pi) rounded to two decimal places?', correct_answer: '3.14', incorrect_answers: ['3.13', '3.15', '3.16'] },
-];
+// Offline cache helpers
+const offlineKey = (diff: string | undefined, amount: number) => `offlineQuestions_${diff || 'any'}_${amount}`;
 
 const QuizPage: React.FC = () => {
   const navigate = useNavigate();
@@ -105,30 +94,28 @@ const QuizPage: React.FC = () => {
         const params = new URLSearchParams({ amount: String(amount), type: 'multiple' });
         if (difficulty) params.append('difficulty', difficulty);
         const resp = await fetch(`${API_BASE}?${params}`);
-        if (!resp.ok) {
-          if (resp.status === 429) {
-            // Rate limited: use fallback
-            const mapped = mapQuestions(defaultFallback).slice(0, amount);
-            if (!cancelled) setQuestions(mapped);
-            return;
-          }
-          throw new Error(`HTTP ${resp.status}`);
-        }
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         const data = await resp.json();
-        if (data.response_code !== 0) {
-          // API did not return questions: use fallback
-          const mapped = mapQuestions(defaultFallback).slice(0, amount);
-          if (!cancelled) setQuestions(mapped);
-          return;
-        }
+        if (data.response_code !== 0) throw new Error('No questions available');
         const mapped = mapQuestions(data.results as ApiQuestion[]);
-        if (!cancelled) setQuestions(mapped);
+        if (!cancelled) {
+          setQuestions(mapped);
+          // store offline
+          try {
+            localStorage.setItem(offlineKey(difficulty, amount), JSON.stringify(mapped));
+          } catch { /* ignore quota errors */ }
+        }
       } catch (e) {
-        // Network or unexpected error: use fallback first, then surface error if that also fails
+        // Network or API error: try offline cache, else show error
         try {
-          const mapped = mapQuestions(defaultFallback).slice(0, amount);
-          if (!cancelled) setQuestions(mapped);
-        } catch (_) {
+          const cached = localStorage.getItem(offlineKey(difficulty, amount));
+          if (cached) {
+            const mapped: Question[] = JSON.parse(cached);
+            if (!cancelled) setQuestions(mapped);
+          } else if (!cancelled) {
+            setError(e instanceof Error ? e.message : 'Failed to load questions');
+          }
+        } catch {
           if (!cancelled) setError(e instanceof Error ? e.message : 'Failed to load questions');
         }
       } finally {
